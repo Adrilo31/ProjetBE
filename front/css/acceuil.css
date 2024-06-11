@@ -1,0 +1,45 @@
+
+
+header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2; /* S'assurer que le header est au-dessus de la sidebar */
+}
+
+
+
+.sidebar {
+    height: calc(100% - 70px); /* Ajuster la hauteur pour compenser la hauteur du header */
+    width: 200px;
+    position: fixed;
+    top: 70px; /* Placer la sidebar sous la navbar */
+    left: 0;
+    background-color: #6a7e9c;
+    overflow-x: hidden;
+    padding-top: 20px;
+    z-index: 1; /* Mettre la sidebar sous le header */
+}
+
+.sidebar a {
+    padding: 30px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+main {
+    margin-left: 210px; /* Same as the width of the sidebar */
+    padding: 20px;
+    padding-top: 100px; /* Ajouter une marge en haut pour éviter que le contenu soit caché sous le header */
+}

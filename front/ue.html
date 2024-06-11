@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/navbar.css">
+    <title>Page Étudiant</title>
+</head>
+<body>
+<header>
+    <nav>
+        <img src="images/logo.png" alt="Logo du site" width="150">
+        <div>
+            <a href="acceuil.html">Accueil</a>
+            <a href="etudiant.html">Étudiants</a>
+            <a href="#ue">UE</a>
+            <a href="#stats">Statistiques</a>
+            <a href="#quitter">Quitter</a>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <h1>Liste des Unités d'Enseignement</h1>
+        <div id="search-bar">
+            <input type="text" id="search-ue-id" placeholder="id UE">
+            <input type="text" id="search-ue-name" placeholder="Nom de l'UE">
+            <button id="search-button">Rechercher</button>
+        </div>
+        <div id="filters">
+            <label for="mention-select">Filtrer par mention :</label>
+            <select id="mention-select">
+                <option value="">Toutes les mentions</option>
+            </select>
+            <label for="parcours-select">Filtrer par parcours :</label>
+            <select id="parcours-select">
+                <option value="">Tous les parcours</option>
+            </select>
+            <button id="apply-filters-button">Appliquer les filtres</button>
+        </div>
+        <div id="student-table-container"></div>
+    </div>
+</main>
+</body>
+</html>
