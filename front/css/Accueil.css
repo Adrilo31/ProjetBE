@@ -1,0 +1,25 @@
+header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav img {
+    margin-right: 20px;
+}
+
+nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
