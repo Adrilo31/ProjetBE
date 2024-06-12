@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/navbar.css">
     <title>Étudiants</title>
+    <script src="etudiants.js" defer></script>f
 </head>
 <body>
 <header>
     <nav>
         <img src="images/logo.png" alt="Logo du site" width="150">
         <div>
-            <a href="acceuil.html">Accueil</a>
+            <a href="accueil.html">Accueil</a>
             <a href="etudiant.html">Étudiants</a>
             <a href="ue.html">UE</a>
             <a href="#stats">Statistiques</a>
@@ -37,9 +38,25 @@
             <select id="parcours-select">
                 <option value="">Tous les parcours</option>
             </select>
-            <button id="apply-filters-button">Appliquer les filtres</button>
+            <button id="apply-filters-button" onclick="filtrer(parcours-select)">Appliquer les filtres</button>
         </div>
         <div id="student-table-container"></div>
+
+
+        <table width="100%">
+            <tr>
+                <th>Numéro</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Mention</th>
+                <th>Parcours</th>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+
         <div id="add-student">
             <h3> Ajouter un étudiant </h3>
             <input type="text" id="add-last-name" placeholder="Nom">
@@ -52,10 +69,9 @@
             <select id="parcours-attribuer">
                 <option value="">Choisir parcours</option>
             </select>
-            <button id="ajouter-etudaint"> Ajouter </button>
+            <button id="ajouter-etudiant"> Ajouter </button>
         </div>
     </div>
 </main>
-<script src="js/etudiants.js"></script>
 </body>
 </html>
