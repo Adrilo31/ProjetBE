@@ -11,8 +11,6 @@ header {
     top: 0;
 }
 
-
-
 nav {
     display: flex;
     align-items: center;
@@ -28,8 +26,17 @@ nav a {
     margin: 0 20px;
     text-decoration: none;
     color: #007bff;
+    padding: 10px;
 }
 
 nav a:hover {
     text-decoration: underline;
+    background-color: #ddd;
 }
+
+nav a.active {
+    background-color: #99b79c;
+    color: white;
+    text-decoration: none;
+}
+

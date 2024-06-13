@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/ue.css">
     <title>Unités d'enseignement</title>
 </head>
 <body>
@@ -14,8 +15,8 @@
             <a href="accueil.html">Accueil</a>
             <a href="etudiant.html">Étudiants</a>
             <a href="#ue">UE</a>
-            <a href="#stats">Statistiques</a>
-            <a href="#quitter">Quitter</a>
+            <a href="statistiques.html">Statistiques</a>
+            <a>Quitter</a>
         </div>
     </nav>
 </header>
@@ -23,7 +24,7 @@
     <div class="container">
         <h1>Liste des Unités d'Enseignement</h1>
         <div id="search-bar">
-            <input type="text" id="search-ue-id" placeholder="id UE">
+            <input type="text" id="search-ue-id" placeholder="ID UE">
             <input type="text" id="search-ue-name" placeholder="Nom de l'UE">
             <button id="search-button">Rechercher</button>
         </div>
@@ -38,8 +39,13 @@
             </select>
             <button id="apply-filters-button">Appliquer les filtres</button>
         </div>
-        <div id="student-table-container"></div>
+        <div id="ue-table-container">
+            <!-- La table des UE sera ajoutée ici par JS -->
+        </div>
     </div>
 </main>
+<script src="JS/ue.js" defer></script>
+<script src="JS/navbar.js" defer></script>
+
 </body>
 </html>

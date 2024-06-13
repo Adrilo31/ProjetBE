@@ -14,7 +14,7 @@ header {
 
 .sidebar {
     height: calc(100% - 70px); /* Ajuster la hauteur pour compenser la hauteur du header */
-    width: 200px;
+    width: 250px;
     position: fixed;
     top: 70px; /* Placer la sidebar sous la navbar */
     left: 0;
