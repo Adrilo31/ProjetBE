@@ -1,0 +1,53 @@
+/* Styles pour la page des unités d'enseignement */
+
+.container {
+    padding: 20px;
+}
+
+#search-bar, #filters {
+    margin-bottom: 20px;
+}
+
+#search-bar input {
+    padding: 8px;
+    margin-right: 10px;
+}
+
+#search-bar button, #filters button {
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#search-bar button:hover, #filters button:hover {
+    background-color: #0056b3;
+}
+
+#filters select {
+    padding: 8px;
+    margin-right: 10px;
+}
+
+#ue-table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f8f9fa;
+}
