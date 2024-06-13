@@ -14,8 +14,8 @@
             <a href="accueil.html">Accueil</a>
             <a href="etudiant.html">Étudiants</a>
             <a href="ue.html">UE</a>
-            <a href="#stats">Statistiques</a>
-            <a href="#quitter">Quitter</a>
+            <a href="statistiques.html">Statistiques</a>
+            <a>Quitter</a>
         </div>
     </nav>
 </header>
@@ -37,11 +37,27 @@
             <select id="parcours-select">
                 <option value="">Tous les parcours</option>
             </select>
-            <button id="apply-filters-button">Appliquer les filtres</button>
+            <button id="apply-filters-button" onclick="filtrer(parcours-select)">Appliquer les filtres</button>
         </div>
         <div id="student-table-container"></div>
+
+
+        <table width="100%">
+            <tr>
+                <th>Numéro</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Mention</th>
+                <th>Parcours</th>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+
         <div id="add-student">
-            <h3> Ajouter un étudiant </h3>
+            <h3> Ajouter un étudiant à une formation </h3>
             <input type="text" id="add-last-name" placeholder="Nom">
             <input type="text" id="add-first-name" placeholder="Prénom">
             <label for="mention-select"> Mention </label>
@@ -52,10 +68,11 @@
             <select id="parcours-attribuer">
                 <option value="">Choisir parcours</option>
             </select>
-            <button id="ajouter-etudaint"> Ajouter </button>
+            <button id="ajouter-etudiant"> Ajouter </button>
         </div>
     </div>
 </main>
-<script src="js/etudiants.js"></script>
+<script src="JS/navbar.js"></script>
+<script src="etudiants.js" defer></script>
 </body>
 </html>

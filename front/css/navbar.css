@@ -35,7 +35,7 @@ nav a:hover {
 }
 
 nav a.active {
-    background-color: #04AA6D;
+    background-color: #99b79c;
     color: white;
     text-decoration: none;
 }

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Parcourt chaque lien
     navLinks.forEach(link => {
         // Vérifie si le href du lien correspond à l'URL actuelle sans les paramètres de requête
-        if (link.href === window.location.href.split(/[?#]/)[0]) {
+        if (link.href.split(/[?#]/)[0] === window.location.href.split(/[?#]/)[0]) {
             // Ajoute la classe 'active' au lien correspondant
             link.classList.add('active');
         }
