@@ -11,7 +11,7 @@ ajouterE.onclick = function () {};
 
 
 
-pool.query("select * from etudiant", (err, rows, fields) => {
+pool.query("SELECT * from etudiant", (err, rows, fields) => {
     if (err) throw err
 })
 pool.end();
