@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/navbar.css">
     <title>Étudiants</title>
-    <script src="etudiants.js" defer></script>f
 </head>
 <body>
 <header>
     <nav>
         <img src="images/logo.png" alt="Logo du site" width="150">
         <div>
-            <a href="accueil.html">Accueil</a>
+            <a href="page_accueil.html">Accueil</a>
             <a href="etudiant.html">Étudiants</a>
             <a href="ue.html">UE</a>
-            <a href="#stats">Statistiques</a>
-            <a href="#quitter">Quitter</a>
+            <a href="statistiques.html">Statistiques</a>
+            <a>Quitter</a>
         </div>
     </nav>
 </header>
@@ -58,7 +57,7 @@
 
 
         <div id="add-student">
-            <h3> Ajouter un étudiant </h3>
+            <h3> Ajouter un étudiant à une formation </h3>
             <input type="text" id="add-last-name" placeholder="Nom">
             <input type="text" id="add-first-name" placeholder="Prénom">
             <label for="mention-select"> Mention </label>
@@ -73,5 +72,7 @@
         </div>
     </div>
 </main>
+<script src="JS/navbar.js"></script>
+<script src="etudiants.js" defer></script>
 </body>
 </html>
