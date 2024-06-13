@@ -1,5 +1,6 @@
 const express = require('express');
-const pool = require('./connexion-bd'); // Assure-toi que c'est le bon chemin pour ton fichier de connexion à la BD
+//const pool = require('./connexion-bd'); // Assure-toi que c'est le bon chemin pour ton fichier de connexion à la BD
+const pool = require('../connexion-bd.js'); // C'est celui la le bon
 const cors = require('cors');
 const app = express();
 const port = 3000;
