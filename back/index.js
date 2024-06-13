@@ -22,3 +22,8 @@ app.use("/ue/:id", details_UE);
 app.listen(port, () => {
     console.log(`Serveur : http://localhost:${port}`);
 });
+const pool = require('./connexion-bd');
+
+
+
+
