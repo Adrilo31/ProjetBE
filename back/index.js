@@ -2,8 +2,11 @@
 // npm run dev
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const port = 3000;
+
+// Enable all CORS requests
+app.use(cors());
 
 // Pour relier tous les fichiers de routes à index.js
 const accueil = require('./accueil/routes-accueil');
@@ -16,6 +19,6 @@ const details_UE = require('./details-UE/routes-details-UE');
 app.use("/", accueil, liste_etudiants, details_etudiants, liste_UE, details_UE);
 
 
-app.listen(port, () => {
-    console.log(`Serveur : http://localhost:${port}`);
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
 });
