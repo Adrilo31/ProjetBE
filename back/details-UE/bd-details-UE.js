@@ -33,4 +33,20 @@ function getDetailsUE() {
 }
 
 
+const { db } = require('../connexion-bd');
+
+const validerUE = (etudiantId, ueId) => {
+    return new Promise((resolve, reject) => {
+        const query = 'UPDATE etudiants_ue SET etat = "validé" WHERE etudiant_id = ? AND ue_id = ?';
+        db.query(query, [etudiantId, ueId], (err, results) => {
+            if (err) return reject(err);
+            resolve(results);
+        });
+    });
+};
+
+module.exports = {
+    validerUE,
+};
+
 module.exports = { getDetailsUE };
