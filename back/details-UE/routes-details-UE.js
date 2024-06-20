@@ -3,9 +3,6 @@ const router= express.Router()
 const pool = require('../connexion-bd.js');
 const { getDetailsUE, getListeInscritsUE, getListeEtuEnCours, getListeInscrire } = require("./bd-details-UE");
 
-router.use(express.json());
-
-
 // Route pour obtenir les détails d'une UE
 router.get("/api/ue/:idUE",(req,res)=>{
     const codeUE = req.params.idUE;

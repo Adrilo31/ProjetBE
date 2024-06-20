@@ -5,8 +5,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Enable all CORS requests
 app.use(cors());
+app.use(express.json())
 
 // Pour relier tous les fichiers de routes à index.js
 const accueil = require('./accueil/routes-accueil');
