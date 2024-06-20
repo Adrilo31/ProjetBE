@@ -58,5 +58,16 @@ router.put("/api/ue/:idUE/validerUE",(req,res)=>{
 });
 
 
+// Route pour inscrire un étudiant à l'UE
+router.post("/api/ue/:idUE/inscrireUE",(req,res)=>{
+    const { etudiantId, ueId, semestreId } = req.body;
+    const sql = `insert into suivre (etudiant_id, ue_code, semestre_id, valide) values (?, ?, ?, false);`
+    pool.query(sql, [etudiantId, ueId, semestreId], (err, result) => {
+        if(err) throw err;
+        res.json(result);
+    });
+});
+
+
 
 module.exports = router;
