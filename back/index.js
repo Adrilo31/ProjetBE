@@ -14,9 +14,10 @@ const liste_etudiants = require('./liste-etudiants/routes-liste-etudiants');
 const details_etudiants = require('./details-etudiant/routes-details-etudiant');
 const liste_UE = require('./liste-UEs/routes-liste-UEs');
 const details_UE = require('./details-UE/routes-details-UE');
+const semestre = require('./semestre/routes-semestre');
 
 // Pour utiliser ces fichiers
-app.use("/", accueil, liste_etudiants, details_etudiants, liste_UE, details_UE);
+app.use("/", accueil, liste_etudiants, details_etudiants, liste_UE, details_UE, semestre);
 
 
 app.listen(3000, () => {

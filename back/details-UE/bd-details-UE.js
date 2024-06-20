@@ -6,8 +6,8 @@ function getDetailsUE() {
     return `
         select code, nomUE, nomMen, sum(suivre.valide)/count(suivre.etudiant_id) taux
         from unitesenseignement inner join mentions on unitesenseignement.mention_id = mentions.idMen
-        inner join suivre on unitesenseignement.code = suivre.ue_code
-        inner join semestres on suivre.semestre_id = semestres.idSem
+        left join suivre on unitesenseignement.code = suivre.ue_code
+        left join semestres on suivre.semestre_id = semestres.idSem
         where code = ?
         group by code;
     `
