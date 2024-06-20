@@ -2,7 +2,8 @@ const express = require('express');
 const router= express.Router()
 const pool = require('../connexion-bd.js');
 const { getDetailsUE, getListeInscritsUE, getListeEtuEnCours, getListeInscrire } = require("./bd-details-UE");
-const { validerUE } = require('./bd-details-UE');
+
+router.use(express.json());
 
 
 // Route pour obtenir les détails d'une UE
@@ -47,12 +48,15 @@ router.get("/api/ue/:idUE/inscrire",(req,res)=>{
 
 
 // Route pour valider une UE
-router.post('/validerUE', (req, res) => {
-    const { etudiantId, ueId } = req.body;
-    validerUE(etudiantId, ueId)
-        .then(result => res.status(200).json(result))
-        .catch(err => res.status(500).json({ error: err.message }));
+router.put("/api/ue/:idUE/validerUE",(req,res)=>{
+    const { etudiantId, ueId, semestreId } = req.body;
+    const sql = `update suivre set valide = true where etudiant_id = ? and ue_code = ? and semestre_id = ?`
+    pool.query(sql, [etudiantId, ueId, semestreId], (err, result) => {
+        if(err) throw err;
+        res.json(result);
+    });
 });
+
 
 
 module.exports = router;
