@@ -1,29 +1,47 @@
 const express = require('express');
-const router= express.Router()
-const pool = require('../connexion-bd.js');
-const { getDetailsUE } = require("./bd-details-UE");
-const { validerUE } = require('./bd-details-UE');
+const router = express.Router();
+const {
+    getUeActuelle,
+    getUePassee,
+    getUeDisponible,
+    updateEtudiant,
+    deleteEtudiant
+} = require('./bd-details-etudiant');
 
-
-// Route spécifique à une UE, pour obtenir ses détails
-router.get("/api/ue/:idUE",(req,res)=>{
-
-    const codeUE = req.params.idUE;
-    const sql = getDetailsUE();
-
-    pool.query(sql, [codeUE, codeUE], (err, result) => {
-        if(err) throw err;
-        res.json(result);
-    });
-
+router.get('/api/ueactuelle/:idEtu', (req, res) => {
+    const idEtu = req.params.idEtu;
+    getUeActuelle(idEtu)
+        .then(results => res.json(results))
+        .catch(err => res.status(500).json({ error: 'Erreur lors de la requête', details: err }));
 });
 
-router.post('/validerUE', (req, res) => {
-    const { etudiantId, ueId } = req.body;
-    validerUE(etudiantId, ueId)
-        .then(result => res.status(200).json(result))
-        .catch(err => res.status(500).json({ error: err.message }));
+router.get('/api/uepassee/:idEtu', (req, res) => {
+    const idEtu = req.params.idEtu;
+    getUePassee(idEtu)
+        .then(results => res.json(results))
+        .catch(err => res.status(500).json({ error: 'Erreur lors de la requête', details: err }));
 });
 
+router.get('/api/uedisponible/:idEtu', (req, res) => {
+    const idEtu = req.params.idEtu;
+    getUeDisponible(idEtu)
+        .then(results => res.json(results))
+        .catch(err => res.status(500).json({ error: 'Erreur lors de la requête', details: err }));
+});
+
+router.put('/api/etudiants/:id', (req, res) => {
+    const idEtu = req.params.id;
+    const { attribut, valeur } = req.body;
+    updateEtudiant(idEtu, attribut, valeur)
+        .then(results => res.json({ message: 'Étudiant mis à jour avec succès', results }))
+        .catch(err => res.status(500).json({ error: 'Erreur lors de la mise à jour de l\'étudiant', details: err }));
+});
+
+router.delete('/api/etudiants/:id', (req, res) => {
+    const idEtu = req.params.id;
+    deleteEtudiant(idEtu)
+        .then(results => res.json({ message: 'Étudiant supprimé avec succès', results }))
+        .catch(err => res.status(500).json({ error: 'Erreur lors de la suppression de l\'étudiant', details: err }));
+});
 
 module.exports = router;
