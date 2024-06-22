@@ -65,6 +65,18 @@ router.post("/api/ue/:idUE/inscrireUE",(req,res)=>{
     });
 });
 
+// Route pour désinscrire un étudiant de l'UE
+router.delete("/api/ue/:idUE/inscrireUE/:idEtu/:idSemestre",(req,res)=>{
+    const codeUE = req.params.idUE;
+    const etudiant = req.params.idEtu;
+    const semestre = req.params.idSemestre;
+    const sql = `delete from suivre where etudiant_id = ? and ue_code = ? and semestre_id = ?;`
+    pool.query(sql, [etudiant, codeUE, semestre], (err, result) => {
+        if(err) throw err;
+        res.json(result);
+    });
+});
+
 
 
 module.exports = router;
