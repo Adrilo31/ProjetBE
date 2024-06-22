@@ -8,6 +8,7 @@ const getEtudiants = (req, res) => {
         JOIN Parcours P ON E.parcours_id = P.idPar
     `;
 
+
     pool.query(sql, (error, results) => {
         if (error) {
             console.error('Erreur lors de la requête : ', error);
