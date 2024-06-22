@@ -19,5 +19,10 @@ router.get('/etudiants', bd.getEtudiants);
 // Route pour ajouter un étudiant
 router.post('/etudiants', bd.addEtudiant);
 
+
+// Route pour obtenir un étudiant par ID
+router.get('/etudiants/:id', bd.getEtudiantById);
+
+
 // Exportation du routeur pour l'utiliser dans index.js
 module.exports = router;
