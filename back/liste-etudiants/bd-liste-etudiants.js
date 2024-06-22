@@ -26,7 +26,26 @@ const addEtudiant = (req, res) => {
     });
 };
 
+const getEtudiantById = (req, res) => {
+    const idEtu = req.params.id;
+    pool.query('SELECT * FROM Etudiants WHERE IdEtu = ?', [idEtu], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la récupération de l\'étudiant:', error);
+            res.status(500).json({ message: 'Erreur lors de la récupération de l\'étudiant' });
+            return;
+        }
+        if (results.length > 0) {
+            res.status(200).json(results[0]);
+        } else {
+            res.status(404).json({ message: 'Étudiant non trouvé' });
+        }
+    });
+};
+
+
+
 module.exports = {
     getEtudiants,
     addEtudiant,
+    getEtudiantById,
 };
