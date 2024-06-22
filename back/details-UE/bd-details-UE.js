@@ -21,7 +21,7 @@ function getDetailsUE() {
 // * si validé ou non,
 function getListeInscritsUE() {
     return `
-        select IdEtu, prenomEtu, nomEtu, CONCAT(annee_debut, ' - ', annee_fin) annee, nomSem, idSem, valide, en_cours 
+        select IdEtu, prenomEtu, nomEtu, CONCAT(annee_debut, ' - ', annee_fin) annee, nomSem, idSem, valide, en_cours, code 
         from etudiants inner join suivre on etudiants.IdEtu = suivre.etudiant_id
         inner join unitesenseignement on suivre.ue_code = unitesenseignement.code
         inner join semestres on suivre.semestre_id = semestres.idSem
