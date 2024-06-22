@@ -16,8 +16,21 @@ const addUE = (req, res) => {
     });
 };
 
+const getUesByMention = (req, res) => {
+    const idMention = req.params.idMention;
+    pool.query('SELECT * FROM UnitesEnseignement WHERE mention_id = ?', [idMention], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la récupération des UE par mention:', error);
+            res.status(500).json({ message: 'Erreur lors de la récupération des UE par mention', error: error.message });
+            return;
+        }
+        res.status(200).json(results);
+    });
+};
+
 module.exports = {
     getUEs,
     addUE,
+    getUesByMention,
 };
 

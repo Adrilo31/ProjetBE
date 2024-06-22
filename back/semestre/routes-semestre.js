@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router= express.Router()
 const pool = require('../connexion-bd.js');
@@ -15,9 +16,11 @@ router.get("/api/semestre/actuel",(req,res)=>{
 
 // Route pour obtenir le semestre suivant
 router.get("/api/semestre/suivant",(req,res)=>{
-    const sql = `select idSem, CONCAT(annee_debut, ' - ', annee_fin) annee, nomSem, en_cours
-                        from semestres inner join annee on semestres.annee_id = annee.idAnn
-                        where idSem in (select idSem+1 from semestres where en_cours);`;
+    const sql = `select IFNULL(idSem, 'erreur') idSem, IFNULL(CONCAT(annee_debut, ' - ', annee_fin), 'erreur') annee, 
+                        IFNULL(nomSem, 'erreur') nomSem, IFNULL(en_cours, 'erreur') en_cours
+                        from (select idSem+1 idSemSuiv from semestres where en_cours) semestreSuivant
+                        left join semestres on semestres.idSem = semestreSuivant.idSemSuiv
+                        left join annee on semestres.annee_id = annee.idAnn;`;
     pool.query(sql, (err, result) => {
         if(err) throw err;
         res.json(result);

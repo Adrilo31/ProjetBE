@@ -19,4 +19,7 @@ router.get('/UEs', bd.getUEs);
 // Route pour ajouter une UE
 router.post('/UEs', bd.addUE);
 
+router.get('/mentions/:idMention/ues', bd.getUesByMention);
+
+
 module.exports = router;

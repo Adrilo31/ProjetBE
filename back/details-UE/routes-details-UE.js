@@ -65,24 +65,6 @@ router.post("/api/ue/:idUE/inscrireUE",(req,res)=>{
     });
 });
 
-// Route pour annuler la validation de l'UE d'un étudiant
-router.put('/api/etudiants/:id/annuler', (req, res) => {
-    const idEtu = req.params.id;
-    const { ueId, semestreId } = req.body;
 
-    const sql = `
-    UPDATE Suivre
-    SET valide = false
-    WHERE etudiant_id = ? AND ue_code = ? AND semestre_id = ?
-  `;
-
-    pool.query(sql, [idEtu, ueId, semestreId], (error, results) => {
-        if (error) {
-            console.error('Erreur lors de l\'annulation de la validation : ', error);
-            return res.status(500).json({ error: 'Erreur lors de l\'annulation de la validation de l\'UE' });
-        }
-        res.json({ message: 'Validation de l\'UE annulée avec succès' });
-    });
-});
 
 module.exports = router;
