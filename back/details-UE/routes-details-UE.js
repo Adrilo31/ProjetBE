@@ -55,7 +55,7 @@ router.put("/api/ue/:idUE/validerUE",(req,res)=>{
 });
 
 // Route pour annuler la validation de l'UE d'un étudiant pour le semestre donné
-router.put('/api/ue/annuler-validation', (req, res) => {
+router.put('/api/ue/:id/annuler-validation', (req, res) => {
     const { etudiantId, ueId, semestreId } = req.body;
     const sql = `
     UPDATE Suivre
@@ -82,6 +82,17 @@ router.post("/api/ue/:idUE/inscrireUE",(req,res)=>{
     });
 });
 
+// Route pour désinscrire un étudiant de l'UE
+router.delete("/api/ue/:idUE/inscrireUE/:idEtu/:idSemestre",(req,res)=>{
+    const codeUE = req.params.idUE;
+    const etudiant = req.params.idEtu;
+    const semestre = req.params.idSemestre;
+    const sql = `delete from suivre where etudiant_id = ? and ue_code = ? and semestre_id = ?;`
+    pool.query(sql, [etudiant, codeUE, semestre], (err, result) => {
+        if(err) throw err;
+        res.json(result);
+    });
+});
 
 
 module.exports = router;
