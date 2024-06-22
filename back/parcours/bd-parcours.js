@@ -42,17 +42,22 @@ const getParcoursByMention = (req, res) => {
 
 // Fonction pour obtenir les étudiants par parcours
 const getEtudiantsByParcours = (req, res) => {
-    const parcoursId = req.params.id;
-    pool.query('SELECT * FROM Etudiants WHERE parcours_id = ?', [parcoursId], (error, results) => {
+    const idParcours = req.params.id;
+    const sql = `
+        SELECT E.IdEtu, E.prenomEtu, E.nomEtu, P.nomPar AS parcours, E.diplome
+        FROM Etudiants E
+        JOIN Parcours P ON E.parcours_id = P.idPar
+        WHERE P.idPar = ?
+    `;
+
+    pool.query(sql, [idParcours], (error, results) => {
         if (error) {
             console.error('Erreur lors de la récupération des étudiants par parcours:', error);
-            res.status(500).json({ message: 'Erreur lors de la récupération des étudiants par parcours' });
-            return;
+            return res.status(500).json({ error: 'Erreur lors de la récupération des étudiants par parcours' });
         }
-        res.status(200).json(results);
+        res.status(200).json(results); // Envoie les résultats en réponse
     });
 };
-
 
 module.exports = {
     getParcours,
