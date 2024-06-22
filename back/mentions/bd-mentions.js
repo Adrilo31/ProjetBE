@@ -2,7 +2,7 @@ const pool = require('../connexion-bd.js'); // Importation de la connexion à la
 
 // Fonction pour obtenir la liste des mentions
 const getMentions = (req, res) => {
-    pool.query('SELECT idMen AS id, nomMen AS nom FROM Mentions', (error, results) => {
+    pool.query('SELECT idMen, nomMen FROM Mentions', (error, results) => {
         if (error) {
             console.error('Erreur lors de la récupération des mentions:', error);
             res.status(500).json({ message: 'Erreur lors de la récupération des mentions' });
@@ -14,7 +14,7 @@ const getMentions = (req, res) => {
 
 const getMentionById = (req, res) => {
     const { id: mentionId } = req.params; // Récupère l'ID de la mention depuis les paramètres de l'URL
-    pool.query('SELECT idMen AS id, nomMen AS nom FROM Mentions WHERE idMen = ?', [mentionId], (error, results) => {
+    pool.query('SELECT idMen, nomMen FROM Mentions WHERE idMen = ?', [mentionId], (error, results) => {
         if (error) {
             console.error('Erreur lors de la récupération de la mention par ID:', error);
             res.status(500).json({ message: 'Erreur lors de la récupération de la mention par ID' });

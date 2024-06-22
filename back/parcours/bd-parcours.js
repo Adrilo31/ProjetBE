@@ -29,7 +29,7 @@ const getParcoursById = (req, res) => {
 
 const getParcoursByMention = (req, res) => {
     const mentionId = req.params.idMention;
-    pool.query('SELECT idPar AS id, nomPar AS nom FROM Parcours WHERE mention_id = ?', [mentionId], (error, results) => {
+    pool.query('SELECT idPar, nomPar FROM Parcours WHERE mention_id = ?', [mentionId], (error, results) => {
         if (error) {
             console.error('Erreur lors de la récupération des parcours par mention:', error);
             res.status(500).json({ message: 'Erreur lors de la récupération des parcours par mention' });
