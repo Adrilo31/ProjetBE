@@ -8,7 +8,6 @@ const getEtudiants = (req, res) => {
         JOIN Parcours P ON E.parcours_id = P.idPar
     `;
 
-
     pool.query(sql, (error, results) => {
         if (error) {
             console.error('Erreur lors de la requête : ', error);
@@ -21,16 +20,24 @@ const getEtudiants = (req, res) => {
 //code pour ajouter un étudiant
 const addEtudiant = (req, res) => {
     const { prenomEtu, nomEtu, parcours_id, diplome } = req.body;
-    pool.query('INSERT INTO Etudiants (prenomEtu, nomEtu, parcours_id, diplome) VALUES (?, ?, ?, ?)', [prenomEtu, nomEtu, parcours_id, diplome], (error, results) => {
-        if (error) throw error;
-        res.status(201).json({ message: 'Etudiant ajouté avec succès', id: results.insertId });
-    });
+
+    pool.query(
+        'INSERT INTO Etudiants (prenomEtu, nomEtu, parcours_id, diplome) VALUES (?, ?, ?, ?)',
+        [ prenomEtu, nomEtu, parcours_id, diplome],
+        (error, results) => {
+            if (error) {
+                console.error('Erreur lors de la requête : ', error);
+                return res.status(500).json({ error: 'Erreur lors de la requête' });
+            }
+            res.status(201).json({ id: results.insertId });
+        }
+    );
 };
 
 const getEtudiantById = (req, res) => {
-    const idEtu = req.params.id;
+    const idEtu = req.params.idEtu;
     const sql = `
-        SELECT E.IdEtu, E.prenomEtu, E.nomEtu, P.nomPar AS parcours, E.diplome
+        SELECT E.prenomEtu, E.nomEtu, P.nomPar AS parcours, E.diplome
         FROM Etudiants E
         JOIN Parcours P ON E.parcours_id = P.idPar
         WHERE E.IdEtu = ?
