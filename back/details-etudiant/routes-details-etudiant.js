@@ -3,7 +3,7 @@ const router= express.Router()
 
 const pool = require('../connexion-bd.js'); // C'est celui la le bon
 const port = 3000;
-router.get('/api/ueactuelle/:idEtu', (req, res) => {
+router.get('/ueactuelle/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
         SELECT UE.nomUE 
@@ -23,7 +23,7 @@ router.get('/api/ueactuelle/:idEtu', (req, res) => {
 });
 
 
-router.get('/api/uepassee/:idEtu', (req, res) => {
+router.get('/uepassee/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
         SELECT nomUE 
@@ -42,7 +42,7 @@ router.get('/api/uepassee/:idEtu', (req, res) => {
 });
 
 
-router.get('/api/uedisponible/:idEtu', (req, res) => {
+router.get('uedisponible/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
         SELECT UE.nomUE
@@ -61,7 +61,7 @@ router.get('/api/uedisponible/:idEtu', (req, res) => {
     });
 });
 
-router.put('/api/etudiants/:id', (req, res) => {
+router.put('etudiants/:id', (req, res) => {
     const idEtu = req.params.id;
     const { attribut, valeur } = req.body; // Supposons que vous envoyez un objet { attribut: 'prenomEtu', valeur: 'Nouveau prénom' }
 
@@ -81,7 +81,7 @@ router.put('/api/etudiants/:id', (req, res) => {
         res.json({ message: 'Étudiant mis à jour avec succès' });
     });
 });
-router.delete('/api/etudiants/:id', (req, res) => {
+router.delete('etudiants/:id', (req, res) => {
     const idEtu = req.params.id;
 
 
