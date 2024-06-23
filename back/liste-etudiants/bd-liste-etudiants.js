@@ -40,8 +40,10 @@ const getEtudiantById = (req, res) => {
     const sql = `
         SELECT E.prenomEtu, E.nomEtu, M.nomMen AS mention,P.nomPar AS parcours
         FROM Etudiants E
+        
         JOIN Parcours P ON E.parcours_id = P.idPar
-        JOIN MENTION M ON M.idMen = P.idMen
+        JOIN Mentions M ON P.mention_id = M.idMen 
+        
         WHERE E.IdEtu = ?
     `;
 
