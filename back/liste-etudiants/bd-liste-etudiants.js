@@ -21,10 +21,18 @@ const getEtudiants = (req, res) => {
 //code pour ajouter un étudiant
 const addEtudiant = (req, res) => {
     const { prenomEtu, nomEtu, parcours_id, diplome } = req.body;
-    pool.query('INSERT INTO Etudiants (prenomEtu, nomEtu, parcours_id, diplome) VALUES (?, ?, ?, ?)', [prenomEtu, nomEtu, parcours_id, diplome], (error, results) => {
-        if (error) throw error;
-        res.status(201).json({ message: 'Etudiant ajouté avec succès', id: results.insertId });
-    });
+
+    pool.query(
+        'INSERT INTO Etudiants (prenomEtu, nomEtu, parcours_id, diplome) VALUES (?, ?, ?, ?)',
+        [ prenomEtu, nomEtu, parcours_id, diplome],
+        (error, results) => {
+            if (error) {
+                console.error('Erreur lors de la requête : ', error);
+                return res.status(500).json({ error: 'Erreur lors de la requête' });
+            }
+            res.status(201).json({ id: results.insertId });
+        }
+    );
 };
 
 const getEtudiantById = (req, res) => {
