@@ -24,5 +24,18 @@ router.post('/etudiants', bd.addEtudiant);
 router.get('/etudiants/:id', bd.getEtudiantById);
 
 
+// Route pour supprimer un étudiant
+router.delete('/etudiants/:id', (req, res) => {
+    const id = req.params.id;
+    pool.query('DELETE FROM Etudiants WHERE IdEtu = ?', [id], (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la suppression de l\'étudiant:', error);
+            return res.status(500).json({ error: 'Erreur lors de la suppression de l\'étudiant' });
+        }
+        res.json({ message: 'Étudiant supprimé avec succès' });
+    });
+});
+
+
 // Exportation du routeur pour l'utiliser dans index.js
 module.exports = router;
