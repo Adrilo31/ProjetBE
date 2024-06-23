@@ -12,7 +12,7 @@ const express = require('express');// Importation du module Express
 const router = express.Router();// Création d'un routeur Express
 // Importation du module de gestion de la base de données pour les étudiant
 const bd = require('./bd-liste-etudiants');
-
+const pool = require('../connexion-bd.js');
 
 // Route pour obtenir la liste des étudiants
 router.get('/etudiants', bd.getEtudiants);
