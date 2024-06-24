@@ -1,7 +1,7 @@
 const pool = require('../connexion-bd.js');// Importation de la connexion à la bd
 // Fonction pour obtenir la liste des UE
 const getUEs = (req, res) => {
-    pool.query('SELECT code, nomUE, M.nomMen AS mention, ouverture, credits FROM UnitesEnseignement AS UE JOIN Mentions AS M ON UE.mention_id = M.idMen', (error, results) => {
+    pool.query('SELECT code, nomUE, M.nomMen AS mention, ouverture, credits FROM UnitesEnseignement AS UE LEFT JOIN Mentions AS M ON UE.mention_id = M.idMen', (error, results) => {
         if (error) throw error;
         res.status(200).json(results);
     });
