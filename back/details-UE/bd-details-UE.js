@@ -50,19 +50,23 @@ function getListeEtuEnCours() {
 }
 
 
-// Requête pour récupérer :
-// - La liste des étudiants pouvant s'inscrire à l'UE (et qui ne l'ont pas déjà validée) :
-// * numéro étudiant,
-// * prénom, nom
+// Requête pour récupérer la liste des étudiants pouvant s'inscrire à l'UE :
+// qui ne l'ont pas déjà validée, qui ont validé les prérequis (s'il y en a),
+// qui appartiennent à la même mention que l'UE (si c'est pas une UE d'ouverture)
+// - numéro étudiant,
+// - prénom, nom
 function getListeInscrire() {
     return `
         select distinct IdEtu, prenomEtu, nomEtu
-        from etudiants
+        from etudiants inner join parcours on etudiants.parcours_id = parcours.idPar
+        inner join mentions on parcours.mention_id = mentions.idMen
+        inner join unitesenseignement on mentions.idMen = unitesenseignement.mention_id or unitesenseignement.mention_id is null
         where IdEtu not in (select etudiant_id from suivre
                             where ue_code = ? and valide = true)
         and (select count(*) from etreprerequis
-        left join suivre on etreprerequis.ue_prerequise_code = suivre.ue_code and suivre.etudiant_id = etudiants.IdEtu and valide = true
-        where ue_visee_code = ? and etudiant_id is null) = 0;
+            left join suivre on etreprerequis.ue_prerequise_code = suivre.ue_code and suivre.etudiant_id = etudiants.IdEtu and valide = true
+            where ue_visee_code = ? and etudiant_id is null) = 0
+        and code = ?;
     `
 }
 

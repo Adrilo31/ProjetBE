@@ -37,7 +37,7 @@ router.get("/ue/:idUE/valider",(req,res)=>{
 router.get("/ue/:idUE/inscrire",(req,res)=>{
     const codeUE = req.params.idUE;
     const sql = getListeInscrire();
-    pool.query(sql, [codeUE, codeUE], (err, result) => {
+    pool.query(sql, [codeUE, codeUE, codeUE], (err, result) => {
         if(err) throw err;
         res.json(result);
     });
