@@ -83,7 +83,7 @@ router.get('/uedisponible/:idEtu', (req, res) => {
 });
 
 
-router.put('etudiants/:id', (req, res) => {
+router.put('/etudiants/:id', (req, res) => {
     const idEtu = req.params.id;
     const { attribut, valeur } = req.body; // Supposons que vous envoyez un objet { attribut: 'prenomEtu', valeur: 'Nouveau prénom' }
 
