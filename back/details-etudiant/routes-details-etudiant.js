@@ -6,9 +6,10 @@ const port = 3000;
 router.get('/ueactuelle/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
-        SELECT UE.nomUE 
+        SELECT UE.code, UE.nomUE, M.nomMen AS mention, UE.credits
         FROM UnitesEnseignement AS UE
         JOIN Suivre AS S ON S.ue_code = UE.code
+        JOIN Mentions AS M ON UE.mention_id = M.idMen
         WHERE S.valide = false
         AND S.etudiant_id = ?
     `;
@@ -26,10 +27,12 @@ router.get('/ueactuelle/:idEtu', (req, res) => {
 router.get('/uepassee/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
-        SELECT nomUE 
+        SELECT UE.code, UE.nomUE, M.nomMen AS mention, UE.credits
         FROM UnitesEnseignement AS UE
         JOIN Suivre AS S ON S.ue_code = UE.code
-        WHERE E.idEtu = ? AND S.valide = true
+        JOIN Mentions AS M ON UE.mention_id = M.idMen
+        WHERE S.valide = true
+        AND S.etudiant_id = ?
     `;
 
     pool.query(sql, [idEtu], (error, results) => {
@@ -45,13 +48,15 @@ router.get('/uepassee/:idEtu', (req, res) => {
 router.get('uedisponible/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
-        SELECT UE.nomUE
+        SELECT UE.code, UE.nomUE, M.nomMen AS mention, UE.credits, UE.nomUE
         FROM UnitesEnseignement AS UE
-        JOIN EtrePrerequis AS EP ON UE.code = EP.ue_visee_code
-        JOIN Suivre AS S ON EP.ue_prerequise_code = S.ue_code
-        WHERE S.etudiant_id = ? AND S.valide = true;
-    `;
+        JOIN Suivre AS S ON S.ue_code = UE.code
+        JOIN Mentions AS M ON UE.mention_id = M.idMen
+        JOIN EtrePrerequis AS EP ON UE.code = EP.ue_prerequis_code
+        WHERE S.valide = false
+        AND S.etudiant_id = ?;
 
+    `;
     pool.query(sql, [idEtu], (error, results) => {
         if (error) {
             console.error('Erreur lors de la requête : ', error);
