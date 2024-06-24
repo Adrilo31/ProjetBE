@@ -48,7 +48,7 @@ router.get('/uepassee/:idEtu', (req, res) => {
 router.get('/uedisponible/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
-        SELECT UE.code, UE.nomUE, M.nomMen, UE.credits
+        SELECT UE.code, UE.nomUE, M.nomMen AS mention, UE.credits
         FROM UnitesEnseignement AS UE
         JOIN Parcours AS P ON UE.mention_id = P.mention_id
         JOIN Etudiants AS E ON E.parcours_id = P.idPar
@@ -61,7 +61,7 @@ router.get('/uedisponible/:idEtu', (req, res) => {
             WHERE etudiant_id = ?
         )
         UNION
-        SELECT UE1.nomUE
+        SELECT UE1.nomUE AS prerequis
         FROM UnitesEnseignement AS UE
         JOIN EtrePrerequis AS EP ON UE.code = EP.ue_prerequise_code
         JOIN UnitesEnseignement AS UE1 ON EP.ue_visee_code = UE1.code
