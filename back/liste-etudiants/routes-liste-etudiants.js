@@ -27,12 +27,22 @@ router.get('/etudiants/:id', bd.getEtudiantById);
 // Route pour supprimer un étudiant
 router.delete('/etudiants/:id', (req, res) => {
     const id = req.params.id;
-    pool.query('DELETE FROM Etudiants WHERE IdEtu = ?', [id], (error, results) => {
+
+    // Supprimer d'abord les enregistrements dans 'suivre'
+    pool.query('DELETE FROM suivre WHERE etudiant_id = ?', [id], (error, results) => {
         if (error) {
-            console.error('Erreur lors de la suppression de l\'étudiant:', error);
-            return res.status(500).json({ error: 'Erreur lors de la suppression de l\'étudiant' });
+            console.error('Erreur lors de la suppression des enregistrements de suivre:', error);
+            return res.status(500).json({ error: 'Erreur lors de la suppression des enregistrements de suivre' });
         }
-        res.json({ message: 'Étudiant supprimé avec succès' });
+
+        // Ensuite, supprimer l'étudiant
+        pool.query('DELETE FROM Etudiants WHERE IdEtu = ?', [id], (error, results) => {
+            if (error) {
+                console.error('Erreur lors de la suppression de l\'étudiant:', error);
+                return res.status(500).json({ error: 'Erreur lors de la suppression de l\'étudiant' });
+            }
+            res.json({ message: 'Étudiant supprimé avec succès' });
+        });
     });
 });
 
