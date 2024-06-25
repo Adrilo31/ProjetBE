@@ -38,12 +38,12 @@ const addEtudiant = (req, res) => {
 const getEtudiantById = (req, res) => {
     const idEtu = req.params.id;
     const sql = `
-        SELECT E.prenomEtu, E.nomEtu, M.nomMen AS mention,P.nomPar AS parcours
+        SELECT E.prenomEtu, E.nomEtu, M.nomMen AS mention,P.nomPar AS parcours, SUM(credits*valide) AS creditsEtu
         FROM Etudiants E
-        
         JOIN Parcours P ON E.parcours_id = P.idPar
         JOIN Mentions M ON P.mention_id = M.idMen 
-        
+        JOIN Suivre S ON E.IdEtu = S.etudiant_id
+        JOIN UnitesEnseignement U ON S.ue_code = U.code
         WHERE E.IdEtu = ?
     `;
 
