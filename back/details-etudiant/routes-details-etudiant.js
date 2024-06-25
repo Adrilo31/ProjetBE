@@ -103,22 +103,5 @@ router.put('/etudiants/:id', (req, res) => {
         res.json({ message: 'Étudiant mis à jour avec succès' });
     });
 });
-router.delete('etudiants/:id', (req, res) => {
-    const idEtu = req.params.id;
 
-
-    const sql = `
-        DELETE FROM Etudiants
-        WHERE IdEtu = ?
-    `;
-
-
-    pool.query(sql, [idEtu], (error, results) => {
-        if (error) {
-            console.error('Erreur lors de la suppression : ', error);
-            return res.status(500).json({ error: 'Erreur lors de la suppression de l\'étudiant' });
-        }
-        res.json({ message: 'Étudiant supprimé avec succès' });
-    });
-});
 module.exports = router;
