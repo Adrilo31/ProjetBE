@@ -48,27 +48,31 @@ router.get('/uepassee/:idEtu', (req, res) => {
 router.get('/uedisponible/:idEtu', (req, res) => {
     const idEtu = req.params.idEtu;
     const sql = `
-        SELECT UE.code, UE.nomUE, M.nomMen AS mention, UE.credits
-        FROM UnitesEnseignement AS UE
-        JOIN Parcours AS P ON UE.mention_id = P.mention_id
-        JOIN Etudiants AS E ON E.parcours_id = P.idPar
-        JOIN Semestres AS Sem ON Sem.annee_id = E.annee_id AND Sem.en_cours = true
-        JOIN Mentions AS M ON UE.mention_id = M.idMen
-        WHERE E.idEtu = ? 
-        AND UE.code NOT IN (
-            SELECT ue_code
-            FROM Suivre
-            WHERE etudiant_id = ?
-        )
-        UNION
-        SELECT UE1.nomUE AS prerequis
+        SELECT UE1.code, UE1.nomUE, M.nomMen AS mention, UE1.credits, UE.nomUE AS prerequis
         FROM UnitesEnseignement AS UE
         JOIN EtrePrerequis AS EP ON UE.code = EP.ue_prerequise_code
         JOIN UnitesEnseignement AS UE1 ON EP.ue_visee_code = UE1.code
         JOIN Suivre AS S ON S.ue_code = UE.code
         JOIN Mentions AS M ON UE1.mention_id = M.idMen
-        WHERE S.etudiant_id = ? 
-        AND S.valide = true;
+        WHERE S.etudiant_id = ?
+        AND S.valide = true
+        
+        UNION
+        SELECT UE.code, UE.nomUE, M.nomMen AS mention, UE.credits, null
+        FROM UnitesEnseignement AS UE
+        JOIN Parcours AS P ON UE.mention_id = P.mention_id
+        JOIN Etudiants AS E ON E.parcours_id = P.idPar
+        JOIN Mentions AS M ON UE.mention_id = M.idMen
+        WHERE E.idEtu = ?
+        AND UE.code NOT IN (
+            SELECT ue_code
+            FROM Suivre
+            WHERE etudiant_id = ?
+        )
+        AND UE.code NOT IN(
+            SELECT ue_visee_code
+            FROM EtrePrerequis
+        );
     `;
 
     pool.query(sql, [idEtu, idEtu, idEtu], (error, results) => {
